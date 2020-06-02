@@ -1,18 +1,39 @@
 class Api::ProductsController < ApplicationController
 
-  def all_products
-    @all_products = Product.all
-    render 'all_products.json.jb'
+  def index
+    @products = Product.all
+    render 'index.json.jb'
   end
 
-  def single_product
-    @single_product = Product.all.sample
-    render 'single_product.json.jb'
+  def show
+    @product = Product.find_by(id: params[:id])
+    render 'show.json.jb'
   end
 
-  def any_product
-    @any_product = Product.find_by(id: params[:id])
-    render 'any_product.json.jb'
+  def create
+    @product = Product.create(
+      name: params[:name],
+      price: params[:price],
+      image_url: params[:image_url],
+      description: params[:description]
+    )
+    render 'show.json.jb'
+  end
+
+  def update
+    @product = Product.find_by(id: params[:id])
+    @product.name = params[:name] || @product.name
+    @product.price = params[:price] || @product.price
+    @product.image_url = params[:image_url] || @product.image_url
+    @product.description = params[:description] || @product.description
+    @product.save
+    render 'show.json.jb'
+  end
+  
+  def destroy
+    @product = Product.find_by(id: params[:id])
+    @product.destroy
+    render json: {message: "Recipe was successfully deleted."}
   end
 
 end
