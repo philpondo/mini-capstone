@@ -4,8 +4,10 @@ class Product < ApplicationRecord
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { in: 10..500 }
   
+  scope :is_discounted, -> { where("price < 50") }
+  
   def is_discounted?
-    price < 10
+    price < 50
   end
 
   def tax
@@ -23,4 +25,9 @@ class Product < ApplicationRecord
       "#{inventory} units in stock."
     end
   end
+
+  belongs_to :supplier
+
+  has_many :images
+
 end

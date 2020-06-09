@@ -5,7 +5,8 @@
   tax: number_to_currency(product.tax),
   total: number_to_currency(product.total),
   discounted?: product.is_discounted?,
-  image_url: product.image_url,
+  images: product.images,
   description: product.description,
-  availability: product.available?
+  availability: product.available?,
+  supplied_by: product.supplier.name
 }
