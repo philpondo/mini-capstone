@@ -6,7 +6,9 @@
   total: number_to_currency(product.total),
   discounted?: product.is_discounted?,
   images: product.images,
+  categories: product.category_names,
   description: product.description,
   availability: product.available?,
-  supplied_by: product.supplier.name
+  supplied_by: product.supplier.name,
+  current_user: current_user
 }

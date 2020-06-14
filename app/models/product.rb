@@ -1,11 +1,21 @@
 class Product < ApplicationRecord
   
+  belongs_to :supplier
+
+  has_many :images
+
+  has_many :orders
+
+  has_many :product_categories
+
+  has_many :categories, through: :product_categories
+
   validates :name, length: { in: 1..100 }, uniqueness: true
   validates :price, presence: true, numericality: { greater_than: 0 }
   validates :description, length: { in: 10..500 }
   
   scope :is_discounted, -> { where("price < 50") }
-  
+
   def is_discounted?
     price < 50
   end
@@ -26,8 +36,8 @@ class Product < ApplicationRecord
     end
   end
 
-  belongs_to :supplier
-
-  has_many :images
-
+  def category_names
+    categories.map { |category| category.name }
+  end
+  
 end
