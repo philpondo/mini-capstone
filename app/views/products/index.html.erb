@@ -1,0 +1,12 @@
+<h1>All Products</h1>
+
+<% @products.each do |product| %>
+  <h2><%= product.name %></h2>
+  <h4><%= number_to_currency(product.price) %></h4>
+  <h4><%= product.description %></h4>
+  <% if product.images.any? %>
+    <img src=<%=product.images.first.url%> width="250">
+  <% end %>
+  <br><br>
+  <a href="/products/<%= product.id %>">More Info</a>
+<% end %>

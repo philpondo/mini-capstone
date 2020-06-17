@@ -1,9 +1,1 @@
-{
-  id: @order.id,
-  quantity: @order.quantity,
-  product: @order.product,
-  user_id: @order.user_id,
-  subtotal: @order.subtotal,
-  tax: @order.tax,
-  total: @order.total
-}
+render partial: 'orders.json.jb', locals: {order: @order}

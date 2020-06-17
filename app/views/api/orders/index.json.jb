@@ -1,10 +1,3 @@
 @orders.map do |order|
-  { 
-    user_id: @order.user_id,
-    product: @order.product,
-    quantity: @order.quantity,
-    subtotal: @order.order_subtotal,
-    tax: @order.order_tax,
-    total: @order.order_total
-   }
+  render partial: 'orders.json.jb', locals: {order: order}
 end
