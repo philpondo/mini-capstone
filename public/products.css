@@ -1,0 +1,9 @@
+body {
+  background-image: url('dirty_old_shirt.png');
+  font-family: 'MuseoModerno', cursive;
+}
+
+.jumbotron {
+  background-image: url('dirty_old_shirt.png');
+  color: whitesmoke;
+}

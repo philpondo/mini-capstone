@@ -21,12 +21,36 @@ class ProductsController < ApplicationController
       inventory: params[:inventory],
       supplier_id: params[:supplier_id]
     )
-    @product.save
-    redirect_to "/products/#{@product.id}"
+    if @product.save
+      redirect_to "/products/#{@product.id}"
+    else
+      render json: {errors: @product.errors.full_messages}
+    end
   end
 
   def edit
     @product = Product.find(params[:id])
     render 'edit.html.erb'
   end
+
+  def update
+    @product = Product.find(params[:id])
+    @product.name = params[:name]
+    @product.price = params[:price]
+    @product.description = params[:description]
+    @product.inventory = params[:inventory]
+    @product.supplier_id = params[:supplier_id]
+    if @product.save
+      redirect_to "/products/#{@product.id}"
+    else
+      render json: {errors: @product.errors.full_messages}
+    end
+  end
+
+  def destroy
+    @product = Product.find(params[:id])
+    @product.destroy
+    redirect_to "/products
+  end
+
 end
